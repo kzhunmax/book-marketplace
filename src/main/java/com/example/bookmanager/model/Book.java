@@ -7,7 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "books")
+@Table(
+        name = "books",
+        uniqueConstraints = @UniqueConstraint(
+                name = "uc_book_title_author",
+                columnNames = {"title", "author"}
+        )
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,4 +27,15 @@ public class Book {
     private String author;
     private double price;
     private String description;
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
